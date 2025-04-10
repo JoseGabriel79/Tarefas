@@ -98,7 +98,7 @@ async function editarTarefa(index) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("https://tarefas-bw3f.onrender.com" + index,
+    let req = await fetch("https://tarefas-bw3f.onrender.com/" + index,
         {
             method: "PUT",
             headers: {
