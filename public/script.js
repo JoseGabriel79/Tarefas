@@ -3,21 +3,21 @@ const olHTML = document.getElementById("listaDeTarefas")
 async function baixarTarefas() {
 
     olHTML.innerHTML = ""
-    var tarefas = await fetch("https://tarefas-bw3f.onrender.com")
+    var tarefas = await fetch("http://localhost:8080/tarefas")
     var listaDeTarefas = await tarefas.json()
     listaDeTarefas.forEach((tarefa, index) => {
         const liHTML = document.createElement("li")
         var tarefaPadronizada = capitalizarPrimeiraLetra(tarefa.tarefa)
         if (tarefa.categoria == "casa") {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "lar.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
+                `<div  class="botoes"><button  class= "btExcluir" onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
                     <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
         } else {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "empresa.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
-                     <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
+                `<div class="botoes"><button class= "btExcluir" onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
+                     <button  onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
         }
@@ -37,7 +37,7 @@ async function salvarTarefa() {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("https://tarefas-bw3f.onrender.com", {
+    let req = await fetch("http://localhost:8080/tarefas", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
