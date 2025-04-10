@@ -49,6 +49,10 @@ ol{
     background-color: rgb(69, 160, 73,0.5);
     border-radius: 4px;
 }
+li{
+    background-color: rgb(39, 153, 44,0.6);
+    padding: 10px;
+}
 #tarefas-list {
     list-style-type: none;
     padding: 0;
