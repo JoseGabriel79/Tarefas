@@ -51,7 +51,7 @@ async function salvarTarefa() {
 
 
 async function excluirTarefa(index) {
-    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa" + index,
+    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa/" + index,
         { method: "DELETE" }
     )
     olHTML.innerHTML = ""
@@ -98,7 +98,7 @@ async function editarTarefa(index) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa" + index,
+    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa/" + index,
         {
             method: "PUT",
             headers: {
