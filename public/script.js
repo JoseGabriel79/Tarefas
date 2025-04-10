@@ -10,13 +10,13 @@ async function baixarTarefas() {
         var tarefaPadronizada = capitalizarPrimeiraLetra(tarefa.tarefa)
         if (tarefa.categoria == "casa") {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "lar.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id});recarregarPagina()'>Excluir</button>
+                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
                     <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
         } else {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "empresa.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id});recarregarPagina()'>Excluir</button>
+                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
                      <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
@@ -44,8 +44,9 @@ async function salvarTarefa() {
         },
         body: JSON.stringify({ tarefa, categoria })
     })
-    baixarTarefas()
     tarefa.value = ""
+    olHTML.innerHTML = ""
+    baixarTarefas()
 }
 
 
@@ -53,6 +54,7 @@ async function excluirTarefa(index) {
     let req = await fetch("https://tarefas-bw3f.onrender.com/" + index,
         { method: "DELETE" }
     )
+    olHTML.innerHTML = ""
     baixarTarefas()
 }
 
@@ -61,9 +63,7 @@ async function excluirTarefa(index) {
 baixarTarefas()
 let modal = document.getElementById("modal");
 
-function recarregarPagina() {
-    location.reload();
-} 
+
 
 // Função para abrir o modal com os dados da tarefa
 function abrirModal(tarefaOri, index) {
@@ -82,10 +82,13 @@ function abrirModal(tarefaOri, index) {
                 <br>
                 <button id="confirmarCadastroBtn">Confirmar cadastro</button>
                 `
+
     // Adiciona o evento ao botão
     document.getElementById("confirmarCadastroBtn").onclick = async function () {
         await editarTarefa(index)
     }
+    olHTML.innerHTML = ""
+    baixarTarefas()
 }
 
 async function editarTarefa(index) {
@@ -104,6 +107,7 @@ async function editarTarefa(index) {
             body: JSON.stringify({ tarefa, categoria, index })
         }
     )
+    olHTML.innerHTML = ""
     baixarTarefas()
     fecharModal()
 }
