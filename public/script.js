@@ -10,13 +10,13 @@ async function baixarTarefas() {
         var tarefaPadronizada = capitalizarPrimeiraLetra(tarefa.tarefa)
         if (tarefa.categoria == "casa") {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "lar.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
+                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id});recarregarPagina()'>Excluir</button>
                     <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
         } else {
             liHTML.innerHTML = `<div class="linha"><span class = texto><img src = "empresa.gif">` + " " + tarefaPadronizada +`</span>`+
-                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id})'>Excluir</button>
+                `<div class="botoes"><button onclick='excluirTarefa(${tarefa.id});recarregarPagina()'>Excluir</button>
                      <button onclick='abrirModal("${tarefa.tarefa}", ${tarefa.id})'>Editar</button></div></div>
                      `
             olHTML.appendChild(liHTML)
@@ -61,7 +61,9 @@ async function excluirTarefa(index) {
 baixarTarefas()
 let modal = document.getElementById("modal");
 
-
+function recarregarPagina() {
+    location.reload();
+} 
 
 // Função para abrir o modal com os dados da tarefa
 function abrirModal(tarefaOri, index) {
