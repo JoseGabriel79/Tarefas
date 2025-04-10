@@ -3,7 +3,7 @@ const olHTML = document.getElementById("listaDeTarefas")
 async function baixarTarefas() {
 
     olHTML.innerHTML = ""
-    var tarefas = await fetch("http://localhost:8080/tarefas")
+    var tarefas = await fetch("https://tarefas-bw3f.onrender.com")
     var listaDeTarefas = await tarefas.json()
     listaDeTarefas.forEach((tarefa, index) => {
         const liHTML = document.createElement("li")
@@ -37,7 +37,7 @@ async function salvarTarefa() {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("http://localhost:8080/tarefas", {
+    let req = await fetch("https://tarefas-bw3f.onrender.com", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
