@@ -2,9 +2,9 @@ const olHTML = document.getElementById("listaDeTarefas")
 
 async function baixarTarefas() {
 
+    olHTML.innerHTML = ""
     var tarefas = await fetch("https://tarefas-bw3f.onrender.com")
     var listaDeTarefas = await tarefas.json()
-    olHTML.innerHTML = ""
     listaDeTarefas.forEach((tarefa, index) => {
         const liHTML = document.createElement("li")
         var tarefaPadronizada = capitalizarPrimeiraLetra(tarefa.tarefa)
