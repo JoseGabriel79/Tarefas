@@ -3,7 +3,7 @@ const olHTML = document.getElementById("listaDeTarefas")
 async function baixarTarefas() {
 
     olHTML.innerHTML = ""
-    var tarefas = await fetch("https://tarefas-bw3f.onrender.com")
+    var tarefas = await fetch("https://tarefas-bw3f.onrender.com/tarefas")
     var listaDeTarefas = await tarefas.json()
     listaDeTarefas.forEach((tarefa, index) => {
         const liHTML = document.createElement("li")
@@ -37,7 +37,7 @@ async function salvarTarefa() {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("https://tarefas-bw3f.onrender.com", {
+    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -51,7 +51,7 @@ async function salvarTarefa() {
 
 
 async function excluirTarefa(index) {
-    let req = await fetch("https://tarefas-bw3f.onrender.com/" + index,
+    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa" + index,
         { method: "DELETE" }
     )
     olHTML.innerHTML = ""
@@ -98,7 +98,7 @@ async function editarTarefa(index) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
-    let req = await fetch("https://tarefas-bw3f.onrender.com/" + index,
+    let req = await fetch("https://tarefas-bw3f.onrender.com/tarefa" + index,
         {
             method: "PUT",
             headers: {
